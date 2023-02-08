@@ -11,7 +11,7 @@ function Card(props) {
                 className="element__image"
                 src={props.card.link}
                 onClick={handleClick}
-                alt="не удалось загрузить изображение"></img>
+                alt={props.card.name}></img>
             <h3 className="element__heading">{props.card.name}</h3>
             <div className="element__like-container">
                 <button className="element__like-button" aria-label="like" type="button"></button>
