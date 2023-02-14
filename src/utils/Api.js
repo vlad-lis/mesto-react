@@ -30,10 +30,7 @@ class Api {
         return fetch(`${this._link}/users/me`, {
             method: 'PATCH',
             headers: this._headers,
-            body: JSON.stringify({
-                name: newInfo.username,
-                about: newInfo.userjob
-            })
+            body: JSON.stringify(newInfo)
         })
             .then(info => this._renderResult(info))
     }
@@ -42,10 +39,7 @@ class Api {
         return fetch(`${this._link}/cards`, {
             method: 'POST',
             headers: this._headers,
-            body: JSON.stringify({
-                name: cardData.name,
-                link: cardData.link
-            })
+            body: JSON.stringify(cardData)
         })
             .then(card => this._renderResult(card))
     }
@@ -58,29 +52,28 @@ class Api {
             .then(res => this._renderResult(res))
     }
 
-    addLike(cardId) {
-        return fetch(`${this._link}/cards/${cardId}/likes`, {
-            method: 'PUT',
-            headers: this._headers
-        })
-            .then(like => this._renderResult(like))
-    }
 
-    deleteLike(cardId) {
-        return fetch(`${this._link}/cards/${cardId}/likes`, {
-            method: 'DELETE',
-            headers: this._headers
-        })
-            .then(like => this._renderResult(like))
+    changeLikeCardStatus(cardId, isLiked) {
+        if (!isLiked) {
+            return fetch(`${this._link}/cards/${cardId}/likes`, {
+                method: 'PUT',
+                headers: this._headers
+            })
+                .then(like => this._renderResult(like))
+        } else {
+            return fetch(`${this._link}/cards/${cardId}/likes`, {
+                method: 'DELETE',
+                headers: this._headers
+            })
+                .then(like => this._renderResult(like))
+        }
     }
 
     editAvatar(newAvatar) {
         return fetch(`${this._link}/users/me/avatar`, {
             method: 'PATCH',
             headers: this._headers,
-            body: JSON.stringify({
-                avatar: newAvatar.avatar
-            })
+            body: JSON.stringify(newAvatar)
         })
             .then(res => this._renderResult(res))
     }
