@@ -11,6 +11,10 @@ function EditAvatarPopup(props) {
         });
     }
 
+    useEffect(() => {
+        ref.current.value = '';
+    }, [props.isOpen])
+
     return (
         <PopupWithForm
             name='edit-avatar'

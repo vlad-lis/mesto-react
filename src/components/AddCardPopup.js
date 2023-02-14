@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import PopupWithForm from "./PopupWithForm";
 
 function AddCardPopup(props) {
@@ -21,6 +21,11 @@ function AddCardPopup(props) {
         });
     }
 
+    useEffect(() => {
+        setName('');
+        setLink('');
+    }, [props.isOpen])
+
     return (
         <PopupWithForm
             name='add-card'
@@ -39,6 +44,7 @@ function AddCardPopup(props) {
                     minLength="2"
                     maxLength="30"
                     required
+                    value={name}
                     onChange={handleNameChange}></input>
                 <span className="pop-up__input-error card-name-input-error"></span>
             </label>
@@ -50,6 +56,7 @@ function AddCardPopup(props) {
                     name="link"
                     placeholder="Ссылка на картинку"
                     required
+                    value={link}
                     onChange={handleLinkChange}></input>
                 <span className="pop-up__input-error card-url-input-error"></span>
             </label>
